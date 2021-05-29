@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Peduli Lindungi</string>
+    <string name="splashscreen">Splash Screen</string>
+    <string name="Registrasi">Registrasi</string>
+    <string name="FullName"> Nama Lengkap</string>
+    <string name="image_logo">Image Logo</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Konfirmasi_Password">Konfirmasi Password</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="haveAccount">Are you have an Account ? Login here.</string>
+    <string name="Login">Login</string>
+    <string name="donthaveAccount">Are you dont have Account ? Register here.</string>
+    <string name="Dashboard">Dashboard </string>
+    <string name="LogOut">Logout</string>
+    <string name="welcome">Welcome</string>
+    <string name="user">User</string>
+    <string name="menu">drawer_menu</string>
+</resources>
