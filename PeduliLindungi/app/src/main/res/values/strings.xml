@@ -13,7 +13,13 @@
     <string name="donthaveAccount">Are you dont have Account ? Register here.</string>
     <string name="Dashboard">Dashboard </string>
     <string name="LogOut">Logout</string>
-    <string name="welcome">Welcome</string>
     <string name="user">User</string>
     <string name="menu">drawer_menu</string>
+    <string name="welcome">Welcome to the Peduli Lindungi app</string>
+    <string name="description">Scan your magnetic resonance imaging (MRI)</string>
+    <string name="title">Body Imaging Anomaly Scanner</string>
+    <string name="screening">Screening</string>
+    <string name="about_us">About Us</string>
+    <string name="history">History</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
