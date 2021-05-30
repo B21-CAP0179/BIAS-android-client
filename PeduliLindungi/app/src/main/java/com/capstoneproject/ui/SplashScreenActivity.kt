@@ -1,4 +1,4 @@
-package com.capstoneproject
+package com.capstoneproject.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
