@@ -1,12 +1,15 @@
 package com.capstoneproject.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.capstoneproject.Firestore
 import com.capstoneproject.R
+import com.capstoneproject.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -31,15 +34,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
             if (TextUtils.isEmpty(email)){
-                email_login.setError("Email is Required")
+                email_login.setError("Email is required")
                 return@setOnClickListener
 
             }else if(TextUtils.isEmpty(pasword)){
-                password_login.setError("Password is Required")
+                password_login.setError("Password is required")
                 return@setOnClickListener
 
             } else if (pasword.length < 6){
-                password_login.setError("Password Must > 6 Character")
+                password_login.setError("Password must > 6 character")
             }
             progressBar.visibility = View.VISIBLE
             loginUser(email,pasword)
@@ -57,14 +60,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     fun loginUser(email: String, password: String){
         val progressBar: ProgressBar = findViewById(R.id.progresbar)
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this){task->
-                if (task.isSuccessful){
-                    Toast.makeText(this,"Login Successfully.", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(applicationContext, DashboardActivity::class.java))
-                }else{
-                    Toast.makeText(this,"Failed Login."+task.exception, Toast.LENGTH_SHORT).show()
-                    progressBar.visibility = View.GONE
+                .addOnCompleteListener(this){task->
+                    if (task.isSuccessful){
+                        Firestore().getUserDetail(this@LoginActivity)
+
+
+                    }else{
+                        Toast.makeText(this,"Failed login."+task.exception, Toast.LENGTH_SHORT).show()
+                        progressBar.visibility = View.GONE
+                    }
                 }
-            }
+    }
+
+    fun userLoginSucsess(user: User) {
+
+        Log.i("email: ", user.email)
+        Log.i("fullName", user.fullName)
+
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+        Toast.makeText(this,"Login successfully.", Toast.LENGTH_SHORT).show()
+        startActivity(intent)
+
     }
 }

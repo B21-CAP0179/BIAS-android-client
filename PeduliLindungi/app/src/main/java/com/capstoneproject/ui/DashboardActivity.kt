@@ -1,14 +1,19 @@
 package com.capstoneproject.ui
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.capstoneproject.R
+import com.capstoneproject.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 
 class DashboardActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -17,10 +22,14 @@ class DashboardActivity : AppCompatActivity() {
         val rl_history:RelativeLayout = findViewById(R.id.rl_history)
         val rl_about_us:RelativeLayout = findViewById(R.id.rl_about_us)
         val rl_logout:RelativeLayout = findViewById(R.id.rl_logout)
+        val nama: TextView = findViewById(R.id.nama)
 
+        val sharedPreferences = getSharedPreferences(Constants.NAME_PREFERENCES, Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString(Constants.LOGGED_USERNAME, "")!!
+        nama.text = "$username"
 
         rl_screening.setOnClickListener {
-
+            startActivity(Intent(applicationContext, UploadActivity::class.java))
         }
 
         rl_history.setOnClickListener {
@@ -38,4 +47,5 @@ class DashboardActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

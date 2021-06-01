@@ -15,7 +15,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="user">User</string>
     <string name="menu">drawer_menu</string>
-    <string name="welcome">Welcome to the Peduli Lindungi app</string>
+    <string name="welcome">Welcome </string>
     <string name="description">Scan your magnetic resonance imaging (MRI)</string>
     <string name="title">Body Imaging Anomaly Scanner</string>
     <string name="screening">Screening</string>
@@ -36,4 +36,15 @@
     <string name="kenny">Kenny Ongko</string>
     <string name="id_kenny">C0050499</string>
     <string name="linkedin">LinkedIn</string>
+    <string name="EnterData">Enter your Image</string>
+    <string name="address">Address</string>
+    <string name="gender">Gender</string>
+    <string name="diagnose">Diagnose</string>
+    <string name="name">Nama</string>
+    <string name="xray">X-Ray Image</string>
+    <string name="addImage">Add Image</string>
+    <string name="title_FullName">Fullname :</string>
+    <string name="your_fullName">Your fullname</string>
+    <string name="your_email">Your email</string>
+    <string name="title_email">Email :</string>
 </resources>

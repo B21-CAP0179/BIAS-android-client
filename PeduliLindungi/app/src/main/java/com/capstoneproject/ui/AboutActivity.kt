@@ -1,7 +1,7 @@
 package com.capstoneproject.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.capstoneproject.R
 
 class AboutActivity : AppCompatActivity() {
