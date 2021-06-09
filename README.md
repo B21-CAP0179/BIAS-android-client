@@ -18,8 +18,8 @@ Peduli-lindungi.id is a one-stop service developed by the Indonesian Ministry of
 
 ## Developer / Maintainer Requirements
 
-- Android SDK for at minimum Android 5.0 / Lollipop (API Level 21)
-- Kotlin SDK
+- Android SDK targeting Android 11 (API Level 30)
+- Kotlin SDK >= 1.5
 - Android Studio >=4.1 (recommended)
 
 ## Application Dependencies
@@ -34,7 +34,8 @@ In addition to Android / Android Jetpack libraries, this application also uses l
 The following dependencies statement is used inside this application's Gradle build script:
 
 ~~~kotlin
-implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
@@ -51,6 +52,7 @@ implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+}
 ~~~
 
 How to replicate our application:
