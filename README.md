@@ -26,10 +26,10 @@ Peduli-lindungi.id is a one-stop service developed by the Indonesian Ministry of
 
 In addition to Android / Android Jetpack libraries, this application also uses libraries as follows:
 
-- (Firebase Android SDK by Google)[https://firebase.google.com/docs/android/setup]
-- (CircleImageView by hdodenhof)[https://github.com/hdodenhof/CircleImageView]
-- (Glide by Bumptech)[https://github.com/bumptech/glide]
-- (Retrofit by Square)[https://square.github.io/retrofit/]
+- [Firebase Android SDK by Google](https://firebase.google.com/docs/android/setup)
+- [CircleImageView by hdodenhof](https://github.com/hdodenhof/CircleImageView)
+- [Glide by Bumptech](https://github.com/bumptech/glide)
+- [Retrofit by Square](https://square.github.io/retrofit/)
 
 The following dependencies statement is used inside this application's Gradle build script:
 
