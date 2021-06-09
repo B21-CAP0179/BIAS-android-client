@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.capstoneproject">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,11 +12,18 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
-        <activity android:name=".ui.UploadActivity"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+        <activity android:name=".ui.ResultActivity"
+            android:theme="@style/Theme.FinalProject.NoActionBar"
+            />
+        <activity android:name=".ui.PredictionSelectionActivity"
+            android:theme="@style/Theme.FinalProject.NoActionBar"
+            />
+        <activity
+            android:name=".ui.UploadActivity"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".ui.AboutActivity"
-            android:theme="@style/Theme.FinalProject.NoActionBar"></activity>
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
         <activity
             android:name=".ui.SplashScreenActivity"
             android:screenOrientation="portrait"

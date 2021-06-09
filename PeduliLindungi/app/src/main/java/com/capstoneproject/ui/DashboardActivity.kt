@@ -26,10 +26,10 @@ class DashboardActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences(Constants.NAME_PREFERENCES, Context.MODE_PRIVATE)
         val username = sharedPreferences.getString(Constants.LOGGED_USERNAME, "")!!
-        nama.text = "$username"
+        nama.text = username
 
         rl_screening.setOnClickListener {
-            startActivity(Intent(applicationContext, UploadActivity::class.java))
+            startActivity(Intent(applicationContext, PredictionSelectionActivity::class.java))
         }
 
         rl_history.setOnClickListener {

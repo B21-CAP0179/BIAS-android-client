@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -14,26 +15,47 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.capstoneproject.Firestore
 import com.capstoneproject.R
+import com.capstoneproject.api.PredictorApi
+import com.capstoneproject.model.PredictionRequest
 import com.capstoneproject.utils.Constants
 import com.capstoneproject.utils.GlideLoader
 import kotlinx.android.synthetic.main.activity_upload.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 
 class UploadActivity : AppCompatActivity(),View.OnClickListener {
+
+    companion object {
+        const val EXTRA_MODEL_TYPE = "EXTRA_MODEL_TYPE"
+    }
+
+    private lateinit var progressBar: ProgressBar
+
+    private var mSelectedModel: String = ""
     private var mSelectedImage: Uri? = null
     private var mImageURL: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload)
+
+        mSelectedModel = intent.getStringExtra(EXTRA_MODEL_TYPE) ?: ""
+
         val fullname_upload: TextView = findViewById(R.id.fullname_upload)
+        val email_upload: TextView = findViewById(R.id.email_upload)
+        val btn_add_image_upload: Button = findViewById(R.id.btn_add_image_upload)
+        val btn_diagnose: Button = findViewById(R.id.btn_diagnose)
+        progressBar = findViewById(R.id.progresbar)
+
 
         val sharedPreferences = getSharedPreferences(Constants.NAME_PREFERENCES, Context.MODE_PRIVATE)
         val username = sharedPreferences.getString(Constants.LOGGED_USERNAME, "")!!
-        fullname_upload.text = "$username"
+        fullname_upload.text = username
 
         val email = sharedPreferences.getString(Constants.EMAIL_DATA, "")!!
-        email_upload.text = "$email"
+        email_upload.text = email
 
 
 
@@ -67,6 +89,7 @@ class UploadActivity : AppCompatActivity(),View.OnClickListener {
                 }
 
                 R.id.btn_diagnose ->{
+                    progressBar.visibility = View.VISIBLE
                     if (mSelectedImage != null){
                         Firestore().uploadImagetoCloudStorage(this, mSelectedImage)
                         Toast.makeText(this,"Image Uploaded.", Toast.LENGTH_SHORT).show()
@@ -79,12 +102,9 @@ class UploadActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
     private fun updateImage(){
-        val userHashMap = HashMap<String, Any>()
         if (mImageURL.isNotEmpty()) {
-            userHashMap[Constants.IMAGE] = mImageURL
+            Firestore().addDiagnosisHistory(this, mSelectedModel, mImageURL)
         }
-        Firestore().updateImageURL(this, userHashMap)
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -127,6 +147,38 @@ class UploadActivity : AppCompatActivity(),View.OnClickListener {
 
         mImageURL = imageURL
         updateImage()
+    }
+
+    fun historyCreationSuccess(historyId: String) {
+        val request = PredictionRequest(historyId)
+        PredictorApi.client.requestPrediction(request).enqueue(object:
+            Callback<HashMap<String, Boolean>> {
+            override fun onResponse(
+                call: Call<HashMap<String, Boolean>>,
+                response: Response<HashMap<String, Boolean>>
+            ) {
+                if(response.isSuccessful) {
+                    Toast.makeText(this@UploadActivity,"Prediction Success, Redirecting", Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.GONE
+                    val intent = Intent(this@UploadActivity, ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.EXTRA_HISTORY_ID, historyId)
+                    startActivity(intent)
+                }
+                else {
+                    Log.e(this@UploadActivity.toString(), response.errorBody().toString())
+                    Toast.makeText(this@UploadActivity,"Fail to request prediction", Toast.LENGTH_SHORT).show()
+                    progressBar.visibility = View.GONE
+                }
+            }
+
+            override fun onFailure(call: Call<HashMap<String, Boolean>>, t: Throwable) {
+                Log.e(this@UploadActivity.toString(), t.toString())
+                Toast.makeText(this@UploadActivity,"Fail to request prediction", Toast.LENGTH_SHORT).show()
+                progressBar.visibility = View.GONE
+            }
+
+        }
+        )
     }
 
 

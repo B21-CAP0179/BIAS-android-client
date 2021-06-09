@@ -98,6 +98,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         val intent = Intent(this@RegisterActivity, DashboardActivity::class.java)
         startActivity(intent)
+        finish()
 
     }
 

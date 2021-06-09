@@ -13,13 +13,13 @@ import com.capstoneproject.model.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var auth: FirebaseAuth;
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance()
         val tv_register: TextView = findViewById(R.id.tv_register)
         val btn_login: Button = findViewById(R.id.btn_login)
         val email_login: EditText = findViewById(R.id.email_login)
@@ -80,6 +80,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
         Toast.makeText(this,"Login successfully.", Toast.LENGTH_SHORT).show()
         startActivity(intent)
+        finish()
 
     }
 }

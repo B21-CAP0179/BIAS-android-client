@@ -8,6 +8,7 @@ import android.util.Log
 import com.capstoneproject.model.User
 import com.capstoneproject.ui.LoginActivity
 import com.capstoneproject.ui.RegisterActivity
+import com.capstoneproject.ui.ResultActivity
 import com.capstoneproject.ui.UploadActivity
 import com.capstoneproject.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -43,14 +44,14 @@ class Firestore {
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString(
                             Constants.LOGGED_USERNAME,
-                    "${user.fullName}"
+                        user.fullName
                     )
                     editor.apply()
 
                     val email_data: SharedPreferences.Editor = sharedPreferences.edit()
                     email_data.putString(
                         Constants.EMAIL_DATA,
-                        "${user.email}"
+                        user.email
                     )
                     email_data.apply()
 
@@ -110,25 +111,49 @@ class Firestore {
             }
     }
 
-    fun updateImageURL(activity: Activity, userHashMap: HashMap<String, Any>) {
-        fstore.collection(Constants.USERS)
-            .document(getCurrentUser())
-            .update(userHashMap)
+    fun addDiagnosisHistory(activity: Activity, model: String, imageURL: String) {
+        val newHistoryData = HashMap<String, Any>()
+        newHistoryData["image"] = imageURL
+        newHistoryData["predictions"] = listOf(model)
+        newHistoryData["status"] = "doing"
+        newHistoryData["user_id"] = getCurrentUser()
+
+        fstore.collection(Constants.HISTORY)
+            .add(newHistoryData)
             .addOnSuccessListener {
                 when(activity){
                     is UploadActivity ->{
-
+                        activity.historyCreationSuccess(it.id)
                     }
                 }
             }
             .addOnFailureListener {
                 when(activity){
                     is UploadActivity->{
-
+                        Log.e(
+                            activity.javaClass.simpleName,
+                            it.message,
+                            it
+                        )
                     }
                 }
             }
 
+    }
+
+    fun getScreeningHistoryDetail(activity: Activity, historyId: String) {
+        fstore.collection(Constants.HISTORY)
+            .document(historyId)
+            .get()
+            .addOnSuccessListener {
+                val data = it.data ?: mapOf()
+                when(activity) {
+                    is ResultActivity -> activity.onHistoryFetchSuccess(data)
+                }
+            }
+            .addOnFailureListener {
+
+            }
     }
 
 }

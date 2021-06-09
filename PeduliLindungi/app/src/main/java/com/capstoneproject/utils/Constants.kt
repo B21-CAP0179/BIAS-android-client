@@ -14,6 +14,12 @@ object Constants {
     const val READ_PERMISSION = 2
     const val PICK_IMAGE = 1
     const val IMAGE: String = "image"
+    const val HISTORY: String = "history"
+
+    const val COVID_MODEL = "covid"
+    const val PNEUMONIA_MODEL = "pneumonia"
+
+    const val API_URL = "https://bias-server-aa2xij5ltq-et.a.run.app/"
 
 
     fun showImageChooser(activity:Activity){
