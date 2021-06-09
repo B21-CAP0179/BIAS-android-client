@@ -53,6 +53,8 @@ class ResultActivity : AppCompatActivity() {
         val resultString = "Positive %.2f %%, Negative %.2f %%".format(positiveResult, negativeResult)
         activityBinding.result.text = resultString
 
+        activityBinding.date.text = data["request_date"] as String? ?: ""
+
         GlideLoader(this).loadImage(Uri.parse(data["image"] as String), activityBinding.screeningImage)
 
     }

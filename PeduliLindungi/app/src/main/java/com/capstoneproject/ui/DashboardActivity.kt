@@ -33,7 +33,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         rl_history.setOnClickListener {
-
+            startActivity(Intent(applicationContext, HistoryActivity::class.java))
         }
 
         rl_about_us.setOnClickListener {

@@ -57,4 +57,7 @@
     <string name="result">Result</string>
     <string name="results_here">Results here</string>
     <string name="screening_image">Screening Image</string>
+    <string name="request_date">Request Date</string>
+    <string name="date_of_request">Date of Request</string>
+    <string name="screening_history">Screening History</string>
 </resources>
