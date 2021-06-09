@@ -9,7 +9,11 @@
     <string name="SignUp">Sign Up</string>
     <string name="haveAccount">Are you have an account ? Login here.</string>
     <string name="Login">Login</string>
+<<<<<<< HEAD
     <string name="donthaveAccount">Dont have account ? Sign Up here.</string>
+=======
+    <string name="donthaveAccount">Don\'t have account ? Register here.</string>
+>>>>>>> 0e0dd5f0d44ae190a247d0a67b439d3a670bf362
     <string name="Dashboard">Dashboard </string>
     <string name="LogOut">Logout</string>
     <string name="dashboard">Dashboard</string>
