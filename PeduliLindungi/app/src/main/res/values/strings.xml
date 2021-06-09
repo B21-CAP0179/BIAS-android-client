@@ -47,4 +47,14 @@
     <string name="your_fullName">Your fullname</string>
     <string name="your_email">Your email</string>
     <string name="title_email">Email :</string>
+    <string name="selection_prompt">Please select what prediction you want to seek?</string>
+    <string name="covid_19">COVID-19</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="screening_result">Screening Result</string>
+    <string name="username">Username</string>
+    <string name="requested_diagnosis_type">Requested Diagnosis Type</string>
+    <string name="covid_19_pneumonia">COVID-19 / Pneumonia</string>
+    <string name="result">Result</string>
+    <string name="results_here">Results here</string>
+    <string name="screening_image">Screening Image</string>
 </resources>
