@@ -171,24 +171,27 @@ class Firestore {
             .addOnSuccessListener {
                 val result = arrayListOf<History>()
                 it.documents.forEach { it1 ->
-                    val data = it1.data as Map<String, Any>
-                    val chosenDiagnosis = (data["predictions"] as ArrayList<String>)[0]
-                    val history = History(
-                        id = it1.id,
-                        user_id = data["user_id"] as String,
-                        models = data["predictions"] as ArrayList<String>,
-                        imageUrl = data["image"] as String,
-                        request_date = data["request_date"] as String,
-                        positivePercentage = ((
-                            data["result"] as HashMap<String, Any>
-                                )[chosenDiagnosis] as HashMap<String, Any>
-                            )[chosenDiagnosis].toString().toDouble() * 100,
-                        negativePercentage = ((
-                            data["result"] as HashMap<String, Any>
-                            )[chosenDiagnosis] as HashMap<String, Any>
-                            )["normal"].toString().toDouble() * 100
-                    )
-                    result.add(history)
+                    try {
+                        val data = it1.data as Map<String, Any>
+                        val chosenDiagnosis = (data["predictions"] as ArrayList<String>)[0]
+                        val history = History(
+                            id = it1.id,
+                            user_id = data["user_id"] as String,
+                            models = data["predictions"] as ArrayList<String>,
+                            imageUrl = data["image"] as String,
+                            request_date = data["request_date"] as String,
+                            positivePercentage = ((
+                                    data["result"] as HashMap<String, Any>
+                                    )[chosenDiagnosis] as HashMap<String, Any>
+                                    )[chosenDiagnosis].toString().toDouble() * 100,
+                            negativePercentage = ((
+                                    data["result"] as HashMap<String, Any>
+                                    )[chosenDiagnosis] as HashMap<String, Any>
+                                    )["normal"].toString().toDouble() * 100
+                        )
+                        result.add(history)
+                    }
+                    catch(e: Exception) { }
                 }
                 when(activity) {
                     is HistoryActivity -> activity.onListFetchSuccess(result)
